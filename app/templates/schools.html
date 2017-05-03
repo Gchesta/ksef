@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}
+My Dashboard | Welcome
+{% endblock %}
+{% block content %}
+{% block fab %}
+
+{% endblock %}
+<p style="padding-top: 20px; color: purple"><b>Add a new school</b></p>
+<form method="POST" >
+    <div style="display: table">
+    <div style="display: table-row">
+    <span style="width: 35%; display: table-cell;">
+    {{ form.sub_county_name.label }}
+    {{ form.sub_county_name}}
+    </span>
+    <span style="width: 35%; display: table-cell;">
+    {{ form.school_name.label }}
+    {{ form.school_name}} 
+    </span>
+    <span style="width: 30%; display: table-cell;">
+    {{ form.hidden_tag() }}
+    {{ form.add_school}}
+    </span>
+    </div>
+    </div>
+</form>
+
+<hr/>
+<div style="width: 66%; margin-top: 20px">
+    
+    <div style="width: 66%; float: left; clear: none; display: inline-block;">
+    <div style="width: 50%; float: left; clear: none">
+    {% for school in schools %}
+    <div>
+    {{ school.sub_county_name }}
+    </div>
+    {% endfor %}
+    </div>
+    <div style="width: 50%; float: right; clear: none; margin-top: 0px">
+    {% for school in schools %}
+    <div>
+    {{ school.school_name }}
+    </div>
+    {% endfor %}
+    </div>
+     </div>
+
+     
+
+
+</div>
+{% endblock %}

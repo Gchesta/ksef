@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}
+My Dashboard | Welcome
+{% endblock %}
+{% block content %}
+{% block fab %}
+
+{% endblock %}
+<p style="padding-top: 20px; color: purple"><b>Add a new Category</b></p>
+<form method="POST" >
+    <div style="display: table">
+    <div style="display: table-row">
+    <span style="width: 35%; display: table-cell;">
+    {{ form.category_name.label }}
+    {{ form.category_name}}
+    </span>
+    <span style="width: 30%; display: table-cell;">
+    {{ form.hidden_tag() }}
+    {{ form.add_category}}
+    </span>
+    </div>
+    </div>
+</form>
+
+<hr/>
+<div style="width: 100%; margin-top: 20px">
+
+    <div style="width: 66%; float: left; display: inline-block;">
+
+    {% for category in categories%}
+    <div>
+    <span style="width: 25%">
+    {{ category.category_name }}
+  </span>
+
+    <span style="width:35%; float:right">
+    <a href="{{ url_for('delete_category',category_id=category.category_id) }}"> Delete This Category</a>
+  </span>
+</div>
+
+    {% endfor %}
+
+
+    </div>
+     </div>
+
+
+
+
+</div>
+{% endblock %}

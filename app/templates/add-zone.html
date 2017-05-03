@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}
+My Dashboard | Welcome
+{% endblock %}
+{% block content %}
+{% block fab %}
+
+{% endblock %}
+<form method="POST">
+    {{ form.zone_name.label }} {{ form.zone_name}}
+    {{ form.hidden_tag() }}
+    <input type=submit>
+</form>
+{% endblock %}

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block content %}
+   <form method="POST">
+   
+    {{ form.email.label }} {{ form.email}}
+    {{ form.fullname.label }} {{ form.fullname}}
+    {{ form.school.label }} {{ form.school}}
+    {{ form.password.label }} {{ form.password }}
+     {{ form.hidden_tag() }}
+    <input type=submit>
+</form>
+
+{% endblock %}

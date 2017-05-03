@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}
+My Dashboard | Welcome
+{% endblock %}
+{% block content %}
+{% block fab %}
+
+{% endblock %}
+{% if current_user.register_as == "Educator"%}
+<div style="display: table">
+  {% for mystudent in mystudents%}
+<div style="display: table-row">
+<span style="width:50%; display: table-cell;">
+{{ mystudent.fullname }}
+</span>
+
+{% if mystudent.is_approved %}
+<span style="width:25%; display: table-cell;">
+<h5><a href="{{ url_for('unapprove_student',id=mystudent.id) }}"> Undo Approval of Student</a></h5>
+</span>
+{% else %}
+<span style="width:25%; display: table-cell;">
+<h5><a href="{{ url_for('approve_student',id=mystudent.id) }}"> Approve This Student</a></h5>
+</span>
+
+<span style="width:20%; display: table-cell;">
+<h5><a href="{{ url_for('delete_student',id=mystudent.id) }}"> Delete This Student</a></h5>
+</span>
+
+{% endif %}
+
+</div>
+{% endfor %}
+</div>
+{% endif %}
+{% endblock %}

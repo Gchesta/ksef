@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}
+My Dashboard | Welcome
+{% endblock %}
+{% block content %}
+{% block fab %}
+
+{% endblock %}
+<p style="padding-top: 20px; color: purple"><b>Add a new Sub-County</b></p>
+<form method="POST" >
+    <div style="display: table">
+    <div style="display: table-row">
+    <span style="width: 35%; display: table-cell;">
+    {{ form.sub_county_name.label }}
+    {{ form.sub_county_name}}
+    </span>
+    <span style="width: 30%; display: table-cell;">
+    {{ form.hidden_tag() }}
+    {{ form.add_sub_county}}
+    </span>
+    </div>
+    </div>
+</form>
+
+<hr/>
+<div style="width: 66%; margin-top: 20px">
+    
+    <div style="width: 66%; float: left; clear: none; display: inline-block;">
+    <div style="width: 50%; float: left; clear: none">
+    {% for sub_county in sub_counties %}
+    <div>
+    {{ sub_county }}
+    </div>
+    {% endfor %}
+    </div>
+    
+    </div>
+     </div>
+
+     
+
+
+</div>
+{% endblock %}

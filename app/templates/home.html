@@ -1,0 +1,113 @@
+<DOCTYPE HTML>
+<html lang="en">
+  <head>
+		<title>KSEF Nairobi - The Home of Innovation</title>
+    <link rel="stylesheet" href="./static/stylesheets/bootstrap.css">
+		<link rel="stylesheet" href="./static/stylesheets/styles.css">
+		<meta name="viewport" content="witdh=device-width, initial-scale=1">
+	</head>
+  <body>
+    <!-- Forms start here -->
+    <div class="container">
+    <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-login">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-xs-6">
+          <a href="#" class="active" id="login-form-link">Login</a>
+        </div>
+        <div class="col-xs-6">
+          <a href="#" id="register-form-link">Register</a>
+        </div>
+      </div>
+      <hr>
+    </div>				
+    <div class="row">
+      <div class="col-lg-12">
+        <form id="login-form" method="post" role="form" name="login-form" style="display: block;">
+          {{login_form.csrf_token}}
+         <!-- register_as = StringField("Email", validators=[DataRequired()])
+    email = StringField("Email", validators=[DataRequired()])
+    fullname = StringField("Fullname", validators=[DataRequired()])
+    county = StringField("Fullname", validators=[DataRequired()])
+    zone = StringField("Fullname", validators=[DataRequired()])
+    school = StringField("school", validators=[DataRequired()])
+    password = PasswordField("Password", validators=[ DataRequired()])
+    password2 = PasswordField("Confirm password", validators=[DataRequired()])
+    submit = SubmitField("Register")-->
+          <div class="form-group">
+            {{ login_form.email(class_="form-control", placeholder="Email Adrress", tabindex="1", required="True")}}
+          </div>
+          <div class="form-group">
+            {{ login_form.password(class_="form-control", placeholder="Password", tabindex="2", required="True") }}
+          </div>
+          <div class="form-group text-center">
+            {{ login_form.remember(tabindex="3") }}
+            {{ login_form.remember.label}}
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-6 col-sm-offset-3">
+                {{ login_form.login_submit(class_="form-control btn btn-login", tabindex="4") }}
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="text-center">
+                  <a href="http://ksef-heroku.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!--Javascript file inserted here -->
+        <script src="./static/javascripts/functions.js"></script>
+        <!--Javascript ends here -->
+        <form id="register-form" method="post" role="form" name="register-form" style="display: none;">
+          {{sign_up_form.csrf_token}}
+          <div class="form-group">
+            <p style="color:red; margin-left: 2.5%"> <b>Choose whether you are a STUDENT or an EDUCATOR:</b></p>
+            <b>{{ sign_up_form.register_as(class_="form-control", tabindex="1", required="True") }}</b>
+          </div>
+          <div class="form-group">
+            <b>{{ sign_up_form.email(class_="form-control", placeholder="Email Adrress", tabindex="2", required="True")}}</b>
+          </div>
+          <div class="form-group">
+            <b>{{ sign_up_form.fullname(class_="form-control", placeholder="Full Name", tabindex="3", required="True") }}</b>            
+          </div>
+          <div class="form-group">
+            <p style="color:red; margin-left: 2.5%"> <b>Choose your county:</b></p>
+             <b>{{ sign_up_form.county(class_="form-control", placeholder="County", tabindex="4", required="True") }} </b>
+          </div>
+          
+          
+          <div class="form-group" id="school-choices">
+            <p style="color:red; margin-left: 2.5%" id="sub-county-choices"> <b>Choose your School:</b></p>
+            <b>{{ sign_up_form.school(class_="form-control", value="", tabindex="6", required="True") }}</b>
+          </div>
+          <div class="form-group">
+            {{ sign_up_form.password(class_="form-control", placeholder="Password", tabindex="7", required="True") }}
+          </div>
+          <div class="form-group">
+            {{ sign_up_form.password2(class_="form-control", placeholder="Confirm Password", tabindex="8", required="True") }}
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-6 col-sm-offset-3">
+                {{ sign_up_form.register_submit(class_="form-control btn btn-register", tabindex="9") }}
+             </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <!-- Forms ends here -->
+  </body>
+
