@@ -6,52 +6,59 @@ My Dashboard | Welcome
 {% block fab %}
 
 {% endblock %}
-<form method="POST">
-    {{form1.category}} {{form1.show_projects}}
-    {{ form1.hidden_tag() }}
-
-</form>
-
-
 {% if current_user.register_as == "Educator"%}
 <div style="display: table">
   <div style="display: table-row">
   <span style="width:10%; display: table-cell;">
-  <h4>Category</h4>
+  <h4>Sub-County</h4>
   </span>
   <span style="width:10%; display: table-cell;">
-  <h4>Title</h4>
+  <h4>School</h4>
   </span>
   <span style="width:10%; display: table-cell;">
-  <h4>First Presenter</h4>
+  <h4>Fullname</h4>
   </span>
   <span style="width:10%; display: table-cell;">
-  <h4>Second Presenter</h4>
+  <h4>Approve</h4>
   </span>
   <span style="width:10%; display: table-cell;">
-  <h4>Date Registered</h4>
+  <h4>Make School Representative</h4>
   </span>
   <span style="width:10%; display: table-cell;">
-  <h4>Date Presented</h4>
+  <h4>Make Adjudicator</h4>
   </span>
   <span style="width:10%; display: table-cell;">
-  <h4>Adjudicate Project</h4>
+  <h4>Make Admin</h4>
   </span>
   </div>
 
-  {% for project in projects%}
+  {% for teacher in teachers%}
 <div style="display: table-row;">
 <span style="width:10%; display: table-cell;">
-{{ project.category }}
+{{ teacher.sub_county_name }}
 </span>
 <span style="width:10%; display: table-cell;">
-{{ project.title}}
+{{ teacher.school }}
 </span>
 <span style="width:10%; display: table-cell;">
-{{ project.first_presenter}}
+{{ teacher.fullname}}
+</span>
+{% if not teacher.is_approved %}
+<span style="width:10%; display: table-cell;">
+<h5><a href="{{ url_for('approve_teacher',id=teacher.id) }}"> Approve Teacher</a></h5>
+</span>
+{% else %}
+<span style="width:10%; display: table-cell;">
+<h5><a href="{{ url_for('unapprove_teacher',id=teacher.id) }}"> Approve Teacher</a></h5>
 </span>
 <span style="width:10%; display: table-cell;">
-{{ project.second_presenter}}
+<h5><a href="{{ url_for('make_school_rep',id=teacher.id) }}">Make School Rep</a></h5>
+</span>
+<span style="width:10%; display: table-cell;">
+<h5><a href="{{ url_for('make_adjudicator',id=teacher.id) }}">Make Adjudicator</a></h5>
+</span>
+<span style="width:10%; display: table-cell;">
+<h5><a href="{{ url_for('make_admin',id=teacher.id) }}">Make Admin</a></h5>
 </span>
 <span style="width:10%; display: table-cell;">
 {{ project.date_registered}}
@@ -66,5 +73,4 @@ My Dashboard | Welcome
 {% endfor %}
 </div>
 {% endif %}
-
 {% endblock %}

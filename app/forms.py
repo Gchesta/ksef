@@ -48,3 +48,7 @@ class CategoryForm(FlaskForm):
 class AdjudicateSelectForm(FlaskForm):
     category = SelectField(u"Category", choices = [("", ""), ("Chemistry", "Chemistry")])
     show_projects = SubmitField("Show Projects")
+
+class AdjudicationForm(FlaskForm):
+    category = SelectField(u"Category", choices = [("", ""), ("Chemistry", "Chemistry")])
+    show_projects = SubmitField("Show Projects")

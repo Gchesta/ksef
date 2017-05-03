@@ -162,19 +162,30 @@ def approve_project(project_id):
 
 @app.route("/school-projects/delete/<int:project_id>")
 @login_required
-def delete_project(id):
+def delete_project(project_id):
     project = dbsession.query(Project).filter_by(project_id=project_id).first()
     dbsession.delete(project)
     dbsession.commit()
     return redirect(url_for("school_projects"))
 
-@app.route("/adjudicate-projects.html")
+@app.route("/adjudicate-projects.html", methods=["GET", "POST"])
 @login_required
 def adjudicate_projects():
     form1 = forms.AdjudicateSelectForm()
     categories = [""] + [category.category_name for category in dbsession.query(Category).all()]
     form1.category.choices = [(category, category) for category in categories]
+    if form1.show_projects.data and form1.validate_on_submit():
+        category = form1.category.data
+        all_projects = dbsession.query(Project).filter_by(category=category).all()
+        projects = [project for project in all_projects if not project.is_presented]
+        return render_template("adjudicate-projects.html", form1=form1, projects=projects)
     return render_template("adjudicate-projects.html", form1=form1)
+
+@app.route("/adjudicate-project/<int:project_id>/.html")
+@login_required
+def adjudicate_project(project_id):
+    form = forms.AdjudicationForm()
+    return render_template("adjudicate-projects.html", form=form)
 
 
 
@@ -251,3 +262,43 @@ def schools():
         dbsession.commit()
         return redirect(url_for("schools"))
     return render_template("schools.html", schools=schools, form=form)
+
+@app.route("/registered-teachers.html")
+@login_required
+def registered_teachers():
+    school = current_user.school
+    school_members = dbsession.query(Educator).filter_by(school=school).all()
+    teachers = [user for user in school_members if user.register_as == "Educator"]
+    teachers.remove(current_user)
+    return render_template("registered-teachers.html", teachers=teachers)
+
+@app.route("/registered-teachers/approve/<int:id>")
+@login_required
+def approve_teacher(id):
+    user = dbsession.query(Educator).filter_by(id=id).first()
+    user.is_approved = True
+    dbsession.commit()
+    return redirect(url_for("registered_teachers"))
+
+@app.route("/registered-teachers/unapprove/<int:id>")
+@login_required
+def unapprove_teacher(id):
+    user = dbsession.query(Educator).filter_by(id=id).first()
+    user.is_approved = False
+    dbsession.commit()
+    return redirect(url_for("registered_teachers"))
+
+@app.route("/registered-teachers/delete/<int:id>")
+@login_required
+def delete_teacher(id):
+    user = dbsession.query(Educator).filter_by(id=id).first()
+    dbsession.delete(user)
+    dbsession.commit()
+    return redirect(url_for("registered_teachers"))
+
+"""@app.route("/all-teachers.html")
+@login_required
+def all_teachers():
+    teachers = dbsession.query(Educator).filter_by(register_as=l).all("Educator")
+    teachers.remove(current_user)
+    return render_template("all-teachers.html", teachers=teachers)"""
